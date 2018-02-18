@@ -1,0 +1,10 @@
+#Nabil Rahiman
+#NYU, Abudhabi
+#email:nr83@nyu.edu
+#18/Feb/2018
+
+
+sudo mn --topo=single,5
+sudo mn --topo=single,5 --link=tc,bw=10,delay=10ms
+sudo mn --topo=tree,2
+

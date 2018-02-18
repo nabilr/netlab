@@ -1,31 +1,32 @@
-#!/usr/bin/python
+#Nabil Rahiman
+#NYU, Abudhabi
+#email:nr83@nyu.edu
+#18/Feb/2018
+
+
+#How to test this program
+#sudo mn --custom mininet_example1.py --topo mytopo --test pingall
+#sudo mn --custom mininet_example1.py --topo mytopo
 
 from mininet.topo import Topo
-from mininet.net import Mininet
-from mininet.node import CPULimitedHost
-from mininet.cli import CLI
-from mininet.link import TCLink
-from mininet.util import dumpNodeConnections
-from mininet.log import setLogLevel
+class MyTopo( Topo ):
+    "Simple topology example."
+    def __init__( self ):
+        "Create custom topo."
+        # Initialize topology
+        Topo.__init__( self )
+        #Add hosts and switches
+        h1 = self.addHost( 'h1' )
+        h2 = self.addHost( 'h2' )
+        h3 = self.addHost( 'h3' )
+        h4 = self.addHost( 'h4' )
+        leftSwitch = self.addSwitch( 's1' )
+        rightSwitch = self.addSwitch( 's2' )
+        # Add links
+        self.addLink( h1, leftSwitch )
+        self.addLink( h2, leftSwitch )
+        self.addLink( leftSwitch, rightSwitch )
+        self.addLink( rightSwitch, h3 )
+        self.addLink( rightSwitch, h4 )
 
-
-topo = Topo()
-net = Mininet( topo=topo, host=CPULimitedHost, link=TCLink)
-switch = net.addSwitch( 's1' )
-
-# Each host gets 50%/n of system CPU
-h1 = net.addHost( 'h1', cpu=.5)
-h2 = net.addHost( 'h2', cpu=.5)
-
-# 10 Mbps, 5ms delay, 2% # loss, 1000 packet queue
-net.addLink(h1, switch, bw=10, delay='5ms', loss=2, max_queue_size=1000, use_htb=True)
-net.addLink(h2, switch, bw=10, delay='5ms', loss=2, max_queue_size=1000, use_htb=True)
-net.start()
-print "Dumping host connections"
-dumpNodeConnections( net.hosts)
-print "Testing network connectivity"
-net.pingAll()
-CLI(net)
-print "Testing bandwidth between h1 and h4"
-h1, h2 = net.get( 'h1', 'h2')
-net.stop()
+topos = { 'mytopo': ( lambda: MyTopo() ) }
