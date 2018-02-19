@@ -8,6 +8,7 @@ from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
 from mininet.log import setLogLevel
+from mininet.cli import CLI
 
 class SingleSwitchTopo(Topo):
     "Single switch connected to n hosts."
@@ -25,7 +26,11 @@ net.start()
 print "Dumping host connections"
 dumpNodeConnections(net.hosts)
 print "Testing network connectivity"
-net.pingAll()
-CLI(net)
+h1 = net.get('h1')
+h2 = net.get('h2')
+print("ping h2")
+#CLI(net)
+print h1.cmd('ping -c 3 %s' %  h2.IP())
+#net.pingAll()
 net.stop()
 
