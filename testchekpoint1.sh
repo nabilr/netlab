@@ -72,7 +72,7 @@ do
 	typec=`expr $i % 3`
 	case $typec in
 		0)
-			echo -ne "PASS 1" >&$fd
+			echo -ne "PASS pass1\n" >&$fd
 			;;
 		1)
 			echo -ne "LS\nPWD\nLS\nPWD\n" >&$fd
