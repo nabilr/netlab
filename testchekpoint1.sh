@@ -3,6 +3,9 @@
 #email:nr83@nyu.edu
 #18/Feb/2018
 
+#How to execute:
+#bash testchekpoint1.sh serverIP serverPort  numberOfClients
+
 
 if [ $# -ne 3 ]
 then
