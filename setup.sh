@@ -44,7 +44,7 @@ while [ $i -le $1 ]
 do
 	mkdir client_dir_c$i
 	cd client_dir_c$i
-	dd if=/dev/urandom of=server_file_client$i.txt bs=1048576 count=1
+	dd if=/dev/urandom of=server_file_client$i.txt bs=1048576 count=100
 	cd ..
 	i=`expr $i + 1`
 done
