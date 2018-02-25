@@ -1,4 +1,4 @@
-# netlab
+# FTP Test Scripts
 
 ## Setup script for mininet"
 
