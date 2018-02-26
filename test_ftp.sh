@@ -6,8 +6,8 @@ fi
 idx=$3
 test -e c$idx && rm c1
 mkfifo c1
-./FTPclient  $1 $2 < c$idx  >client$idx.log&  
-eval "exec 8>c$idx"
+./FTPclient  $1 $2 < c1  >client$idx.log&  
+eval "exec 8>c1"
 echo -ne "USER user$idx\n" >&8
 echo -ne "PASS pass$idx\n" >&8
 echo -ne "CD sandbox/ftp_server_dirs/client_dir_c$idx\n" >&8
