@@ -4,10 +4,10 @@ then
 	exit -1
 fi
 idx=$3
-test -e c$idx && rm c1
-mkfifo c1
-nc  $1 $2 < c1  >client$idx.log&  
-eval "exec 8>c1"
+test -e c$idx && rm c$idx
+mkfifo c$idx
+nc  $1 $2 < c$idx  >client$idx.log&  
+eval "exec 8>c$idx"
 echo -ne "U" >&8
 echo -ne "S" >&8
 echo -ne "ER user$idx" >&8
